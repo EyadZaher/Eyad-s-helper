@@ -411,5 +411,5 @@ async def cringe(ctx):
 
 
 
-client.run('ODU1ODc3MzQ3MTU1NjQwMzUx.YM435A.msUjlnebc140Jb2bqHqSPJ1-j5c')
+client.run(os.environ['token'])
 
