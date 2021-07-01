@@ -5,6 +5,7 @@ import asyncio
 import os
 import pymongo
 import datetime
+import time 
 from pymongo import MongoClient
 from discord.enums import Status
 from discord.ext import commands
@@ -193,13 +194,32 @@ async def unban(ctx, *, member):
             await ctx.send(f"Unbanned {user.name}#{user.discriminator}")
             return  
 
-@client.command() 
+def convert(time):
+    pos = ["s","m","h","d"]
+
+    time_dict = {"s" : 1, "m" : 60, "h" : 3600 , "d" : 3600*24}
+
+    unit = time[-1]
+
+    if unit not in pos:
+        return -1
+    try:
+        val = int(time[:-1])
+    except:
+        return -2
+
+
+    return val * time_dict[unit] 
+
+@client.command()
 async def mute(ctx, member:discord.Member, *, reason=None): 
    role = discord.utils.get(ctx.guild.roles, name="Muted")
    guild = ctx.guild 
    if role not in guild.roles:
        perms = discord.Permissions(send_messages=False, speak=False) 
        await guild.create_role(name="Muted", permissions=perms) 
+       await asyncio.sleep(time)
+
        await member.add_roles(role) 
        await ctx.send(f"The member has been muted")
    else:
@@ -391,5 +411,5 @@ async def cringe(ctx):
 
 
 
-client.run(os.environ['token'])
+client.run('ODU1ODc3MzQ3MTU1NjQwMzUx.YM435A.msUjlnebc140Jb2bqHqSPJ1-j5c')
 
