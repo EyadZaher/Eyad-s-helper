@@ -194,7 +194,7 @@ async def unban(ctx, *, member):
             await ctx.send(f"Unbanned {user.name}#{user.discriminator}")
             return  
 
-def convert(time):
+def convert(datetime):
     pos = ["s","m","h","d"]
 
     time_dict = {"s" : 1, "m" : 60, "h" : 3600 , "d" : 3600*24}
@@ -218,7 +218,7 @@ async def mute(ctx, member:discord.Member, *, reason=None):
    if role not in guild.roles:
        perms = discord.Permissions(send_messages=False, speak=False) 
        await guild.create_role(name="Muted", permissions=perms) 
-       await asyncio.sleep(time)
+       await asyncio.sleep(datetime)
 
        await member.add_roles(role) 
        await ctx.send(f"The member has been muted")
